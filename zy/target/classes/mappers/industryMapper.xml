@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ganin.dao.industryMapper" >
+  <resultMap id="BaseResultMap" type="cn.ganin.pojo.industry" >
+    <constructor >
+      <idArg column="industry_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="industry_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    industry_id, industry_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from industry
+    where industry_id = #{industryId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from industry
+    where industry_id = #{industryId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.ganin.pojo.industry" >
+    insert into industry (industry_id, industry_name)
+    values (#{industryId,jdbcType=INTEGER}, #{industryName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.ganin.pojo.industry" >
+    insert into industry
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="industryId != null" >
+        industry_id,
+      </if>
+      <if test="industryName != null" >
+        industry_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="industryId != null" >
+        #{industryId,jdbcType=INTEGER},
+      </if>
+      <if test="industryName != null" >
+        #{industryName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ganin.pojo.industry" >
+    update industry
+    <set >
+      <if test="industryName != null" >
+        industry_name = #{industryName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where industry_id = #{industryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ganin.pojo.industry" >
+    update industry
+    set industry_name = #{industryName,jdbcType=VARCHAR}
+    where industry_id = #{industryId,jdbcType=INTEGER}
+  </update>
+</mapper>

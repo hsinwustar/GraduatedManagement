@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ganin.dao.enterpriseMapper" >
+  <resultMap id="BaseResultMap" type="cn.ganin.pojo.enterprise" >
+    <constructor >
+      <idArg column="enterprise_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="enterprise_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_username" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_contact" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_website" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_scale" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_role_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="enterprise_industry_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_state" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.ganin.pojo.enterprise" >
+    <constructor >
+      <idArg column="enterprise_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="enterprise_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_username" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_address" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_contact" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_website" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_scale" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_nature" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_role_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="enterprise_industry_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_state" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="enterprise_desc" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    enterprise_id, enterprise_name, enterprise_password, enterprise_username, enterprise_address, 
+    enterprise_contact, enterprise_phone, enterprise_email, enterprise_website, enterprise_scale, 
+    enterprise_nature, enterprise_role_id, enterprise_industry_name, enterprise_state
+  </sql>
+  <sql id="Blob_Column_List" >
+    enterprise_desc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from enterprise
+    where enterprise_id = #{enterpriseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from enterprise
+    where enterprise_id = #{enterpriseId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.ganin.pojo.enterprise" >
+    insert into enterprise (enterprise_id, enterprise_name, enterprise_password, 
+      enterprise_username, enterprise_address, 
+      enterprise_contact, enterprise_phone, enterprise_email, 
+      enterprise_website, enterprise_scale, enterprise_nature, 
+      enterprise_role_id, enterprise_industry_name, 
+      enterprise_state, enterprise_desc)
+    values (#{enterpriseId,jdbcType=INTEGER}, #{enterpriseName,jdbcType=VARCHAR}, #{enterprisePassword,jdbcType=VARCHAR}, 
+      #{enterpriseUsername,jdbcType=VARCHAR}, #{enterpriseAddress,jdbcType=VARCHAR}, 
+      #{enterpriseContact,jdbcType=VARCHAR}, #{enterprisePhone,jdbcType=VARCHAR}, #{enterpriseEmail,jdbcType=VARCHAR}, 
+      #{enterpriseWebsite,jdbcType=VARCHAR}, #{enterpriseScale,jdbcType=VARCHAR}, #{enterpriseNature,jdbcType=VARCHAR}, 
+      #{enterpriseRoleId,jdbcType=INTEGER}, #{enterpriseIndustryName,jdbcType=VARCHAR}, 
+      #{enterpriseState,jdbcType=VARCHAR}, #{enterpriseDesc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.ganin.pojo.enterprise" >
+    insert into enterprise
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="enterpriseId != null" >
+        enterprise_id,
+      </if>
+      <if test="enterpriseName != null" >
+        enterprise_name,
+      </if>
+      <if test="enterprisePassword != null" >
+        enterprise_password,
+      </if>
+      <if test="enterpriseUsername != null" >
+        enterprise_username,
+      </if>
+      <if test="enterpriseAddress != null" >
+        enterprise_address,
+      </if>
+      <if test="enterpriseContact != null" >
+        enterprise_contact,
+      </if>
+      <if test="enterprisePhone != null" >
+        enterprise_phone,
+      </if>
+      <if test="enterpriseEmail != null" >
+        enterprise_email,
+      </if>
+      <if test="enterpriseWebsite != null" >
+        enterprise_website,
+      </if>
+      <if test="enterpriseScale != null" >
+        enterprise_scale,
+      </if>
+      <if test="enterpriseNature != null" >
+        enterprise_nature,
+      </if>
+      <if test="enterpriseRoleId != null" >
+        enterprise_role_id,
+      </if>
+      <if test="enterpriseIndustryName != null" >
+        enterprise_industry_name,
+      </if>
+      <if test="enterpriseState != null" >
+        enterprise_state,
+      </if>
+      <if test="enterpriseDesc != null" >
+        enterprise_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="enterpriseId != null" >
+        #{enterpriseId,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseName != null" >
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisePassword != null" >
+        #{enterprisePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseUsername != null" >
+        #{enterpriseUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseAddress != null" >
+        #{enterpriseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseContact != null" >
+        #{enterpriseContact,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisePhone != null" >
+        #{enterprisePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseEmail != null" >
+        #{enterpriseEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseWebsite != null" >
+        #{enterpriseWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseScale != null" >
+        #{enterpriseScale,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseNature != null" >
+        #{enterpriseNature,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseRoleId != null" >
+        #{enterpriseRoleId,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseIndustryName != null" >
+        #{enterpriseIndustryName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseState != null" >
+        #{enterpriseState,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseDesc != null" >
+        #{enterpriseDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ganin.pojo.enterprise" >
+    update enterprise
+    <set >
+      <if test="enterpriseName != null" >
+        enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisePassword != null" >
+        enterprise_password = #{enterprisePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseUsername != null" >
+        enterprise_username = #{enterpriseUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseAddress != null" >
+        enterprise_address = #{enterpriseAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseContact != null" >
+        enterprise_contact = #{enterpriseContact,jdbcType=VARCHAR},
+      </if>
+      <if test="enterprisePhone != null" >
+        enterprise_phone = #{enterprisePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseEmail != null" >
+        enterprise_email = #{enterpriseEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseWebsite != null" >
+        enterprise_website = #{enterpriseWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseScale != null" >
+        enterprise_scale = #{enterpriseScale,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseNature != null" >
+        enterprise_nature = #{enterpriseNature,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseRoleId != null" >
+        enterprise_role_id = #{enterpriseRoleId,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseIndustryName != null" >
+        enterprise_industry_name = #{enterpriseIndustryName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseState != null" >
+        enterprise_state = #{enterpriseState,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseDesc != null" >
+        enterprise_desc = #{enterpriseDesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where enterprise_id = #{enterpriseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.ganin.pojo.enterprise" >
+    update enterprise
+    set enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      enterprise_password = #{enterprisePassword,jdbcType=VARCHAR},
+      enterprise_username = #{enterpriseUsername,jdbcType=VARCHAR},
+      enterprise_address = #{enterpriseAddress,jdbcType=VARCHAR},
+      enterprise_contact = #{enterpriseContact,jdbcType=VARCHAR},
+      enterprise_phone = #{enterprisePhone,jdbcType=VARCHAR},
+      enterprise_email = #{enterpriseEmail,jdbcType=VARCHAR},
+      enterprise_website = #{enterpriseWebsite,jdbcType=VARCHAR},
+      enterprise_scale = #{enterpriseScale,jdbcType=VARCHAR},
+      enterprise_nature = #{enterpriseNature,jdbcType=VARCHAR},
+      enterprise_role_id = #{enterpriseRoleId,jdbcType=INTEGER},
+      enterprise_industry_name = #{enterpriseIndustryName,jdbcType=VARCHAR},
+      enterprise_state = #{enterpriseState,jdbcType=VARCHAR},
+      enterprise_desc = #{enterpriseDesc,jdbcType=LONGVARCHAR}
+    where enterprise_id = #{enterpriseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ganin.pojo.enterprise" >
+    update enterprise
+    set enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      enterprise_password = #{enterprisePassword,jdbcType=VARCHAR},
+      enterprise_username = #{enterpriseUsername,jdbcType=VARCHAR},
+      enterprise_address = #{enterpriseAddress,jdbcType=VARCHAR},
+      enterprise_contact = #{enterpriseContact,jdbcType=VARCHAR},
+      enterprise_phone = #{enterprisePhone,jdbcType=VARCHAR},
+      enterprise_email = #{enterpriseEmail,jdbcType=VARCHAR},
+      enterprise_website = #{enterpriseWebsite,jdbcType=VARCHAR},
+      enterprise_scale = #{enterpriseScale,jdbcType=VARCHAR},
+      enterprise_nature = #{enterpriseNature,jdbcType=VARCHAR},
+      enterprise_role_id = #{enterpriseRoleId,jdbcType=INTEGER},
+      enterprise_industry_name = #{enterpriseIndustryName,jdbcType=VARCHAR},
+      enterprise_state = #{enterpriseState,jdbcType=VARCHAR}
+    where enterprise_id = #{enterpriseId,jdbcType=INTEGER}
+  </update>
+</mapper>

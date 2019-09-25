@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ganin.dao.resumeMapper" >
+  <resultMap id="BaseResultMap" type="cn.ganin.pojo.resume" >
+    <constructor >
+      <idArg column="resume_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="resume_stu_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="resume_stu_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resume_stu_sex" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resume_stu_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resume_stu_email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resume_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resume_school" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resume_major" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resume_edu" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resume_start_school" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="resume_end_school" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="resume_time" jdbcType="DATE" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.ganin.pojo.resumeWithBLOBs" >
+    <constructor >
+      <idArg column="resume_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="resume_stu_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="resume_stu_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resume_stu_sex" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resume_stu_phone" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resume_stu_email" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resume_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resume_school" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resume_major" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resume_edu" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="resume_start_school" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="resume_end_school" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="resume_time" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="resume_desc" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="resume_internship" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="resume_practice" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="resume_skill" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="resume_hobby" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+      <arg column="resume_works" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    resume_id, resume_stu_id, resume_stu_name, resume_stu_sex, resume_stu_phone, resume_stu_email, 
+    resume_name, resume_school, resume_major, resume_edu, resume_start_school, resume_end_school, 
+    resume_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    resume_desc, resume_internship, resume_practice, resume_skill, resume_hobby, resume_works
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from resume
+    where resume_id = #{resumeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from resume
+    where resume_id = #{resumeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.ganin.pojo.resumeWithBLOBs" >
+    insert into resume (resume_id, resume_stu_id, resume_stu_name, 
+      resume_stu_sex, resume_stu_phone, resume_stu_email, 
+      resume_name, resume_school, resume_major, 
+      resume_edu, resume_start_school, resume_end_school, 
+      resume_time, resume_desc, resume_internship, 
+      resume_practice, resume_skill, resume_hobby, 
+      resume_works)
+    values (#{resumeId,jdbcType=INTEGER}, #{resumeStuId,jdbcType=INTEGER}, #{resumeStuName,jdbcType=VARCHAR}, 
+      #{resumeStuSex,jdbcType=VARCHAR}, #{resumeStuPhone,jdbcType=VARCHAR}, #{resumeStuEmail,jdbcType=VARCHAR}, 
+      #{resumeName,jdbcType=VARCHAR}, #{resumeSchool,jdbcType=VARCHAR}, #{resumeMajor,jdbcType=VARCHAR}, 
+      #{resumeEdu,jdbcType=VARCHAR}, #{resumeStartSchool,jdbcType=DATE}, #{resumeEndSchool,jdbcType=DATE}, 
+      #{resumeTime,jdbcType=DATE}, #{resumeDesc,jdbcType=LONGVARCHAR}, #{resumeInternship,jdbcType=LONGVARCHAR}, 
+      #{resumePractice,jdbcType=LONGVARCHAR}, #{resumeSkill,jdbcType=LONGVARCHAR}, #{resumeHobby,jdbcType=LONGVARCHAR}, 
+      #{resumeWorks,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.ganin.pojo.resumeWithBLOBs" >
+    insert into resume
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resumeId != null" >
+        resume_id,
+      </if>
+      <if test="resumeStuId != null" >
+        resume_stu_id,
+      </if>
+      <if test="resumeStuName != null" >
+        resume_stu_name,
+      </if>
+      <if test="resumeStuSex != null" >
+        resume_stu_sex,
+      </if>
+      <if test="resumeStuPhone != null" >
+        resume_stu_phone,
+      </if>
+      <if test="resumeStuEmail != null" >
+        resume_stu_email,
+      </if>
+      <if test="resumeName != null" >
+        resume_name,
+      </if>
+      <if test="resumeSchool != null" >
+        resume_school,
+      </if>
+      <if test="resumeMajor != null" >
+        resume_major,
+      </if>
+      <if test="resumeEdu != null" >
+        resume_edu,
+      </if>
+      <if test="resumeStartSchool != null" >
+        resume_start_school,
+      </if>
+      <if test="resumeEndSchool != null" >
+        resume_end_school,
+      </if>
+      <if test="resumeTime != null" >
+        resume_time,
+      </if>
+      <if test="resumeDesc != null" >
+        resume_desc,
+      </if>
+      <if test="resumeInternship != null" >
+        resume_internship,
+      </if>
+      <if test="resumePractice != null" >
+        resume_practice,
+      </if>
+      <if test="resumeSkill != null" >
+        resume_skill,
+      </if>
+      <if test="resumeHobby != null" >
+        resume_hobby,
+      </if>
+      <if test="resumeWorks != null" >
+        resume_works,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resumeId != null" >
+        #{resumeId,jdbcType=INTEGER},
+      </if>
+      <if test="resumeStuId != null" >
+        #{resumeStuId,jdbcType=INTEGER},
+      </if>
+      <if test="resumeStuName != null" >
+        #{resumeStuName,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeStuSex != null" >
+        #{resumeStuSex,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeStuPhone != null" >
+        #{resumeStuPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeStuEmail != null" >
+        #{resumeStuEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeName != null" >
+        #{resumeName,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeSchool != null" >
+        #{resumeSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeMajor != null" >
+        #{resumeMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeEdu != null" >
+        #{resumeEdu,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeStartSchool != null" >
+        #{resumeStartSchool,jdbcType=DATE},
+      </if>
+      <if test="resumeEndSchool != null" >
+        #{resumeEndSchool,jdbcType=DATE},
+      </if>
+      <if test="resumeTime != null" >
+        #{resumeTime,jdbcType=DATE},
+      </if>
+      <if test="resumeDesc != null" >
+        #{resumeDesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="resumeInternship != null" >
+        #{resumeInternship,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="resumePractice != null" >
+        #{resumePractice,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="resumeSkill != null" >
+        #{resumeSkill,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="resumeHobby != null" >
+        #{resumeHobby,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="resumeWorks != null" >
+        #{resumeWorks,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ganin.pojo.resumeWithBLOBs" >
+    update resume
+    <set >
+      <if test="resumeStuId != null" >
+        resume_stu_id = #{resumeStuId,jdbcType=INTEGER},
+      </if>
+      <if test="resumeStuName != null" >
+        resume_stu_name = #{resumeStuName,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeStuSex != null" >
+        resume_stu_sex = #{resumeStuSex,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeStuPhone != null" >
+        resume_stu_phone = #{resumeStuPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeStuEmail != null" >
+        resume_stu_email = #{resumeStuEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeName != null" >
+        resume_name = #{resumeName,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeSchool != null" >
+        resume_school = #{resumeSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeMajor != null" >
+        resume_major = #{resumeMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeEdu != null" >
+        resume_edu = #{resumeEdu,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeStartSchool != null" >
+        resume_start_school = #{resumeStartSchool,jdbcType=DATE},
+      </if>
+      <if test="resumeEndSchool != null" >
+        resume_end_school = #{resumeEndSchool,jdbcType=DATE},
+      </if>
+      <if test="resumeTime != null" >
+        resume_time = #{resumeTime,jdbcType=DATE},
+      </if>
+      <if test="resumeDesc != null" >
+        resume_desc = #{resumeDesc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="resumeInternship != null" >
+        resume_internship = #{resumeInternship,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="resumePractice != null" >
+        resume_practice = #{resumePractice,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="resumeSkill != null" >
+        resume_skill = #{resumeSkill,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="resumeHobby != null" >
+        resume_hobby = #{resumeHobby,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="resumeWorks != null" >
+        resume_works = #{resumeWorks,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where resume_id = #{resumeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.ganin.pojo.resumeWithBLOBs" >
+    update resume
+    set resume_stu_id = #{resumeStuId,jdbcType=INTEGER},
+      resume_stu_name = #{resumeStuName,jdbcType=VARCHAR},
+      resume_stu_sex = #{resumeStuSex,jdbcType=VARCHAR},
+      resume_stu_phone = #{resumeStuPhone,jdbcType=VARCHAR},
+      resume_stu_email = #{resumeStuEmail,jdbcType=VARCHAR},
+      resume_name = #{resumeName,jdbcType=VARCHAR},
+      resume_school = #{resumeSchool,jdbcType=VARCHAR},
+      resume_major = #{resumeMajor,jdbcType=VARCHAR},
+      resume_edu = #{resumeEdu,jdbcType=VARCHAR},
+      resume_start_school = #{resumeStartSchool,jdbcType=DATE},
+      resume_end_school = #{resumeEndSchool,jdbcType=DATE},
+      resume_time = #{resumeTime,jdbcType=DATE},
+      resume_desc = #{resumeDesc,jdbcType=LONGVARCHAR},
+      resume_internship = #{resumeInternship,jdbcType=LONGVARCHAR},
+      resume_practice = #{resumePractice,jdbcType=LONGVARCHAR},
+      resume_skill = #{resumeSkill,jdbcType=LONGVARCHAR},
+      resume_hobby = #{resumeHobby,jdbcType=LONGVARCHAR},
+      resume_works = #{resumeWorks,jdbcType=LONGVARCHAR}
+    where resume_id = #{resumeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ganin.pojo.resume" >
+    update resume
+    set resume_stu_id = #{resumeStuId,jdbcType=INTEGER},
+      resume_stu_name = #{resumeStuName,jdbcType=VARCHAR},
+      resume_stu_sex = #{resumeStuSex,jdbcType=VARCHAR},
+      resume_stu_phone = #{resumeStuPhone,jdbcType=VARCHAR},
+      resume_stu_email = #{resumeStuEmail,jdbcType=VARCHAR},
+      resume_name = #{resumeName,jdbcType=VARCHAR},
+      resume_school = #{resumeSchool,jdbcType=VARCHAR},
+      resume_major = #{resumeMajor,jdbcType=VARCHAR},
+      resume_edu = #{resumeEdu,jdbcType=VARCHAR},
+      resume_start_school = #{resumeStartSchool,jdbcType=DATE},
+      resume_end_school = #{resumeEndSchool,jdbcType=DATE},
+      resume_time = #{resumeTime,jdbcType=DATE}
+    where resume_id = #{resumeId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ganin.dao.noticMapper" >
+  <resultMap id="BaseResultMap" type="cn.ganin.pojo.notic" >
+    <constructor >
+      <idArg column="notic_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="notic_title" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="notic_content" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="notic_creattime" jdbcType="DATE" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    notic_id, notic_title, notic_content, notic_creattime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from notic
+    where notic_id = #{noticId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from notic
+    where notic_id = #{noticId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.ganin.pojo.notic" >
+    insert into notic (notic_id, notic_title, notic_content, 
+      notic_creattime)
+    values (#{noticId,jdbcType=INTEGER}, #{noticTitle,jdbcType=VARCHAR}, #{noticContent,jdbcType=VARCHAR}, 
+      #{noticCreattime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.ganin.pojo.notic" >
+    insert into notic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="noticId != null" >
+        notic_id,
+      </if>
+      <if test="noticTitle != null" >
+        notic_title,
+      </if>
+      <if test="noticContent != null" >
+        notic_content,
+      </if>
+      <if test="noticCreattime != null" >
+        notic_creattime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="noticId != null" >
+        #{noticId,jdbcType=INTEGER},
+      </if>
+      <if test="noticTitle != null" >
+        #{noticTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="noticContent != null" >
+        #{noticContent,jdbcType=VARCHAR},
+      </if>
+      <if test="noticCreattime != null" >
+        #{noticCreattime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ganin.pojo.notic" >
+    update notic
+    <set >
+      <if test="noticTitle != null" >
+        notic_title = #{noticTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="noticContent != null" >
+        notic_content = #{noticContent,jdbcType=VARCHAR},
+      </if>
+      <if test="noticCreattime != null" >
+        notic_creattime = #{noticCreattime,jdbcType=DATE},
+      </if>
+    </set>
+    where notic_id = #{noticId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ganin.pojo.notic" >
+    update notic
+    set notic_title = #{noticTitle,jdbcType=VARCHAR},
+      notic_content = #{noticContent,jdbcType=VARCHAR},
+      notic_creattime = #{noticCreattime,jdbcType=DATE}
+    where notic_id = #{noticId,jdbcType=INTEGER}
+  </update>
+</mapper>
